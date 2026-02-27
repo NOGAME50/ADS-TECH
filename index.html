@@ -158,9 +158,11 @@
             font-weight: 500;
             margin: 12px 0 10px;
             resize: vertical;
-            min-height: 140px;
-            max-height: 200px;
+            min-height: 350px;
+            max-height: 450px;
             box-shadow: 0 8px 12px #00000040 inset;
+            font-family: 'Segoe UI', monospace;
+            line-height: 1.5;
         }
         textarea:focus {
             outline: 3px solid #feaca7;
@@ -305,13 +307,13 @@
         <button class="btn-action" id="emailBtn">📧 ENVOYER PAR EMAIL</button>
 
         <button class="btn-action btn-wa" id="contactBtn" onclick="window.open('https://wa.me/242069678625','_blank')">💬 𝙲𝙾𝙽𝚃𝙰𝙲𝚃𝙴𝚁 𝙰𝙳𝚂</button>
-        <button class="btn-action btn-wa" id="joinBtn" onclick="window.open('https://whatsapp.com/channel/0029Vb7cq27ISTkSECEyeF3L',''_blank')">📣 JOIN 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷 CHANNEL</button>
+        <button class="btn-action btn-wa" id="joinBtn" onclick="window.open('https://whatsapp.com/channel/0029Vb7cq27ISTkSECEyeF3L','_blank')">📣 JOIN 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷 CHANNEL</button>
 
         <div class="footer-area" id="footerText">
             ✉️ Envoyer à: <strong>support@whatsapp.com</strong>
         </div>
         <div class="signature" id="signatureText">
-            Fait par <strong>𝙰𝙳𝚂</strong> — toutes langues
+            Fait par <strong>𝙰𝙳𝚂 𝚃𝙴𝙲𝙷</strong> — toutes langues
         </div>
     </div>
 
@@ -337,27 +339,499 @@
 
             // ----- TRADUCTIONS (avec alerte) -----
             const translations = {
-                fr: { badge:"🔍 Dénoncer un abus WhatsApp", label:"📞 Entrez le numéro à signaler *", generate:"⚡ GÉNÉRER LE MESSAGE ⚡", copy:"📋 COPIER LE MESSAGE", email:"📧 ENVOYER PAR EMAIL", contact:"💬 CONTACTER 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷", join:"📣 JOIN 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷 CHANNEL", footer:"✉️ Envoyer à: support@whatsapp.com", signature:"Fait par 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷 — toutes langues", subLabel:"✅ Je suis abonné(e) au canal", subBtn:"📱 Vérifier / S'abonner", phonePlaceholder:"+509XXXXXXXX", alertPhone:"Veuillez entrer un numéro de téléphone", alertSub:"Vous devez être abonné au canal pour générer le message." },
-                en: { badge:"🔍 Report WhatsApp abuse", label:"📞 Enter the number to report *", generate:"⚡ GENERATE MESSAGE ⚡", copy:"📋 COPY MESSAGE", email:"📧 SEND BY EMAIL", contact:"💬 𝙲𝙾𝙽𝚃𝙰𝙲𝚃 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷", join:"📣 JOIN 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷 CHANNEL", footer:"✉️ Send to: support@whatsapp.com", signature:"Made by 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷 — all languages", subLabel:"✅ I am subscribed to the channel", subBtn:"📱 Verify / Subscribe", phonePlaceholder:"+509XXXXXXXX", alertPhone:"Please enter a phone number", alertSub:"You must be subscribed to the channel to generate the message." },
-                es: { badge:"🔍 Denunciar abuso WhatsApp", label:"📞 Ingrese el número a denunciar *", generate:"⚡ GENERAR MENSAJE ⚡", copy:"📋 COPIAR MENSAJE", email:"📧 ENVIAR POR CORREO", contact:"💬 CONTACTAR 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷", join:"📣 UNIRSE AL CANAL 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷", footer:"✉️ Enviar a: support@whatsapp.com", signature:"Hecho por 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷 — todos los idiomas", subLabel:"✅ Estoy suscrito al canal", subBtn:"📱 Verificar / Suscribirse", phonePlaceholder:"+509XXXXXXXX", alertPhone:"Ingrese un número de teléfono", alertSub:"Debes estar suscrito al canal para generar el mensaje." },
-                id: { badge:"🔍 Laporkan penyalahgunaan WhatsApp", label:"📞 Masukkan nomor yang dilaporkan *", generate:"⚡ BUAT PESAN ⚡", copy:"📋 SALIN PESAN", email:"📧 KIRIM VIA EMAIL", contact:"💬 HUBUNGI 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷", join:"📣 GABUNG CHANNEL 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷", footer:"✉️ Kirim ke: support@whatsapp.com", signature:"Dibuat oleh 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷 — semua bahasa", subLabel:"✅ Saya sudah berlangganan channel", subBtn:"📱 Periksa / Berlangganan", phonePlaceholder:"+509XXXXXXXX", alertPhone:"Masukkan nomor telepon", alertSub:"Anda harus berlangganan channel untuk membuat pesan." },
-                pt: { badge:"🔍 Denunciar abuso WhatsApp", label:"📞 Insira o número a denunciar *", generate:"⚡ GERAR MENSAGEM ⚡", copy:"📋 COPIAR MENSAGEM", email:"📧 ENVIAR POR E-MAIL", contact:"💬 CONTATAR 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷", join:"📣 ENTRAR NO CANAL 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷", footer:"✉️ Enviar para: support@whatsapp.com", signature:"Feito por 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷 — todos os idiomas", subLabel:"✅ Estou inscrito no canal", subBtn:"📱 Verificar / Inscrever-se", phonePlaceholder:"+509XXXXXXXX", alertPhone:"Digite um número de telefone", alertSub:"Você deve estar inscrito no canal para gerar a mensagem." },
-                ar: { badge:"🔍 الإبلاغ عن انتهاك واتساب", label:"📞 أدخل الرقم المراد الإبلاغ عنه *", generate:"⚡ إنشاء الرسالة ⚡", copy:"📋 نسخ الرسالة", email:"📧 إرسال بالبريد", contact:"💬 الاتصال بـ 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷", join:"📣 الانضمام إلى القناة", footer:"✉️ أرسل إلى: support@whatsapp.com", signature:"صنع بواسطة 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷 — جميع اللغات", subLabel:"✅ أنا مشترك في القناة", subBtn:"📱 تحقق / اشترك", phonePlaceholder:"+509XXXXXXXX", alertPhone:"الرجاء إدخال رقم الهاتف", alertSub:"يجب أن تكون مشتركًا في القناة لإنشاء الرسالة." },
-                ht: { badge:"🔍 Denonse abi WhatsApp", label:"📞 Antre nimewo pou denonse a *", generate:"⚡ JENERI MESAJ LA ⚡", copy:"📋 KOPI MESAJ LA", email:"📧 VOYE PA IMEL", contact:"💬 KONTAKTE 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷", join:"📣 JOIN 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷 CHANNEL", footer:"✉️ Voye bay: support@whatsapp.com", signature:"Fet pa 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷 — tout lang", subLabel:"✅ Mwen abòne nan channel la", subBtn:"📱 Verifye / Abòne", phonePlaceholder:"+509XXXXXXXX", alertPhone:"Tanpri antre nimewo telefòn nan", alertSub:"Ou dwe abòne nan channel la anvan ou jeneri mesaj la." }
+                fr: { 
+                    badge:"🔍 Dénoncer un abus WhatsApp", 
+                    label:"📞 Entrez le numéro à signaler *", 
+                    generate:"⚡ GÉNÉRER LE MESSAGE ⚡", 
+                    copy:"📋 COPIER LE MESSAGE", 
+                    email:"📧 ENVOYER PAR EMAIL", 
+                    contact:"💬 CONTACTER 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷", 
+                    join:"📣 JOIN 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷 CHANNEL", 
+                    footer:"✉️ Envoyer à: support@whatsapp.com", 
+                    signature:"Fait par 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷 — toutes langues", 
+                    subLabel:"✅ Je suis abonné(e) au canal", 
+                    subBtn:"📱 Vérifier / S'abonner", 
+                    phonePlaceholder:"+509XXXXXXXX", 
+                    alertPhone:"Veuillez entrer un numéro de téléphone", 
+                    alertSub:"Vous devez être abonné au canal pour générer le message." 
+                },
+                en: { 
+                    badge:"🔍 Report WhatsApp abuse", 
+                    label:"📞 Enter the number to report *", 
+                    generate:"⚡ GENERATE MESSAGE ⚡", 
+                    copy:"📋 COPY MESSAGE", 
+                    email:"📧 SEND BY EMAIL", 
+                    contact:"💬 CONTACT 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷", 
+                    join:"📣 JOIN 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷 CHANNEL", 
+                    footer:"✉️ Send to: support@whatsapp.com", 
+                    signature:"Made by 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷 — all languages", 
+                    subLabel:"✅ I am subscribed to the channel", 
+                    subBtn:"📱 Verify / Subscribe", 
+                    phonePlaceholder:"+509XXXXXXXX", 
+                    alertPhone:"Please enter a phone number", 
+                    alertSub:"You must be subscribed to the channel to generate the message." 
+                },
+                es: { 
+                    badge:"🔍 Denunciar abuso WhatsApp", 
+                    label:"📞 Ingrese el número a denunciar *", 
+                    generate:"⚡ GENERAR MENSAJE ⚡", 
+                    copy:"📋 COPIAR MENSAJE", 
+                    email:"📧 ENVIAR POR CORREO", 
+                    contact:"💬 CONTACTAR 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷", 
+                    join:"📣 UNIRSE AL CANAL 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷", 
+                    footer:"✉️ Enviar a: support@whatsapp.com", 
+                    signature:"Hecho por 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷 — todos los idiomas", 
+                    subLabel:"✅ Estoy suscrito al canal", 
+                    subBtn:"📱 Verificar / Suscribirse", 
+                    phonePlaceholder:"+509XXXXXXXX", 
+                    alertPhone:"Ingrese un número de teléfono", 
+                    alertSub:"Debes estar suscrito al canal para generar el mensaje." 
+                },
+                id: { 
+                    badge:"🔍 Laporkan penyalahgunaan WhatsApp", 
+                    label:"📞 Masukkan nomor yang dilaporkan *", 
+                    generate:"⚡ BUAT PESAN ⚡", 
+                    copy:"📋 SALIN PESAN", 
+                    email:"📧 KIRIM VIA EMAIL", 
+                    contact:"💬 HUBUNGI 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷", 
+                    join:"📣 GABUNG CHANNEL 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷", 
+                    footer:"✉️ Kirim ke: support@whatsapp.com", 
+                    signature:"Dibuat oleh 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷 — semua bahasa", 
+                    subLabel:"✅ Saya sudah berlangganan channel", 
+                    subBtn:"📱 Periksa / Berlangganan", 
+                    phonePlaceholder:"+509XXXXXXXX", 
+                    alertPhone:"Masukkan nomor telepon", 
+                    alertSub:"Anda harus berlangganan channel untuk membuat pesan." 
+                },
+                pt: { 
+                    badge:"🔍 Denunciar abuso WhatsApp", 
+                    label:"📞 Insira o número a denunciar *", 
+                    generate:"⚡ GERAR MENSAGEM ⚡", 
+                    copy:"📋 COPIAR MENSAGEM", 
+                    email:"📧 ENVIAR POR E-MAIL", 
+                    contact:"💬 CONTATAR 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷", 
+                    join:"📣 ENTRAR NO CANAL 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷", 
+                    footer:"✉️ Enviar para: support@whatsapp.com", 
+                    signature:"Feito por 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷 — todos os idiomas", 
+                    subLabel:"✅ Estou inscrito no canal", 
+                    subBtn:"📱 Verificar / Inscrever-se", 
+                    phonePlaceholder:"+509XXXXXXXX", 
+                    alertPhone:"Digite um número de telefone", 
+                    alertSub:"Você deve estar inscrito no canal para gerar a mensagem." 
+                },
+                ar: { 
+                    badge:"🔍 الإبلاغ عن انتهاك واتساب", 
+                    label:"📞 أدخل الرقم المراد الإبلاغ عنه *", 
+                    generate:"⚡ إنشاء الرسالة ⚡", 
+                    copy:"📋 نسخ الرسالة", 
+                    email:"📧 إرسال بالبريد", 
+                    contact:"💬 الاتصال بـ 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷", 
+                    join:"📣 الانضمام إلى القناة", 
+                    footer:"✉️ أرسل إلى: support@whatsapp.com", 
+                    signature:"صنع بواسطة 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷 — جميع اللغات", 
+                    subLabel:"✅ أنا مشترك في القناة", 
+                    subBtn:"📱 تحقق / اشترك", 
+                    phonePlaceholder:"+509XXXXXXXX", 
+                    alertPhone:"الرجاء إدخال رقم الهاتف", 
+                    alertSub:"يجب أن تكون مشتركًا في القناة لإنشاء الرسالة." 
+                },
+                ht: { 
+                    badge:"🔍 Denonse abi WhatsApp", 
+                    label:"📞 Antre nimewo pou denonse a *", 
+                    generate:"⚡ JENERI MESAJ LA ⚡", 
+                    copy:"📋 KOPI MESAJ LA", 
+                    email:"📧 VOYE PA IMEL", 
+                    contact:"💬 KONTAKTE 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷", 
+                    join:"📣 JOIN 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷 CHANNEL", 
+                    footer:"✉️ Voye bay: support@whatsapp.com", 
+                    signature:"Fet pa 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷 — tout lang", 
+                    subLabel:"✅ Mwen abòne nan channel la", 
+                    subBtn:"📱 Verifye / Abòne", 
+                    phonePlaceholder:"+509XXXXXXXX", 
+                    alertPhone:"Tanpri antre nimewo telefòn nan", 
+                    alertSub:"Ou dwe abòne nan channel la anvan ou jeneri mesaj la." 
+                }
             };
 
-            // ----- MESSAGE DE SIGNALEMENT (court mais complet) -----
+            // ----- MESSAGES PUISSANTS (30-50 lignes) -----
             function buildMessage(phone, lang) {
                 const p = phone && phone.trim() ? phone.trim() : "[NUMÉRO MANQUANT]";
+                
+                // Messages FRANÇAIS (puissant)
+                const frMessage = `🆘 SIGNALEMENT URGENT - NUMÉRO DANGEREUX 🆘
+
+À l'équipe de modération WhatsApp,
+
+Je vous écris pour SIGNALER un numéro qui représente une MENACE GRAVE pour la sécurité des utilisateurs de WhatsApp.
+
+📌 NUMÉRO CONCERNÉ : ${p}
+
+Ce compte se livre à des ACTIVITÉS CRIMINELLES et violations GRAVES des conditions d'utilisation :
+
+1️⃣ HARCELLEMENT PSYCHOLOGIQUE GRAVE
+- Envoi de menaces de mort et d'intimidation
+- Harcèlement sexuel répété
+- Insultes à caractère raciste et xénophobe
+
+2️⃣ PORNOGRAPHIE INFANTILE 🚨
+- Partage de vidéos explicites de mineurs
+- Diffusion d'images pédopornographiques
+- Sollicitation sexuelle de personnes vulnérables
+
+3️⃣ ARNAQUES ET FRAUDES FINANCIÈRES
+- Tentatives d'escroquerie par faux profils
+- Demande de paiements sous menaces
+- Vol d'identité et usurpation
+
+4️⃣ SPAM MASSIF ET NUISANCES
+- Envoi de centaines de messages non sollicités
+- Diffusion de liens malveillants et virus
+- Création de groupes pour diffuser de la haine
+
+Ce comportement met en danger des centaines d'utilisateurs, y compris des enfants et des personnes âgées.
+
+Je demande des MESURES IMMÉDIATES :
+❌ Bannissement PERMANENT de ce numéro
+❌ Blocage de l'appareil associé (IMEI)
+❌ Transmission du dossier aux autorités compétentes (cybercriminalité)
+
+Je tiens à disposition des PREUVES IRRÉFUTABLES :
+📸 Captures d'écran des conversations
+🎥 Vidéos des contenus illégaux partagés
+📁 Fichiers témoignant des menaces
+
+WhatsApp doit être un espace SÛR pour tous. Ne laissez pas ces criminels continuer à nuire.
+
+Merci d'agir dans les plus brefs délais.
+
+Respectueusement,
+
+Un utilisateur citoyen engagé
+Avec le soutien de la chaîne 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷`;
+
+                // Messages ENGLISH (powerful)
+                const enMessage = `🆘 URGENT REPORT - DANGEROUS NUMBER 🆘
+
+To the WhatsApp moderation team,
+
+I am writing to REPORT a number that represents a SERIOUS THREAT to the safety of WhatsApp users.
+
+📌 NUMBER INVOLVED: ${p}
+
+This account engages in CRIMINAL ACTIVITIES and GROSS violations of the terms of use:
+
+1️⃣ SEVERE PSYCHOLOGICAL HARASSMENT
+- Sending death threats and intimidation
+- Repeated sexual harassment
+- Racist and xenophobic insults
+
+2️⃣ CHILD PORNOGRAPHY 🚨
+- Sharing explicit videos of minors
+- Dissemination of child pornography images
+- Sexual solicitation of vulnerable people
+
+3️⃣ FINANCIAL SCAMS AND FRAUD
+- Scam attempts through fake profiles
+- Payment demands under threats
+- Identity theft and impersonation
+
+4️⃣ MASSIVE SPAM AND NUISANCE
+- Sending hundreds of unsolicited messages
+- Distribution of malicious links and viruses
+- Creating groups to spread hatred
+
+This behavior endangers hundreds of users, including children and the elderly.
+
+I request IMMEDIATE MEASURES:
+❌ PERMANENT ban of this number
+❌ Blocking of the associated device (IMEI)
+❌ Transmission of the file to the competent authorities (cybercrime)
+
+I have IRREFUTABLE EVIDENCE available:
+📸 Screenshots of conversations
+🎥 Videos of illegal content shared
+📁 Files documenting the threats
+
+WhatsApp must be a SAFE space for everyone. Do not let these criminals continue to harm.
+
+Thank you for acting promptly.
+
+Respectfully,
+
+A committed citizen user
+Supported by the 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷 channel`;
+
+                // Messages ESPAÑOL (poderoso)
+                const esMessage = `🆘 DENUNCIA URGENTE - NÚMERO PELIGROSO 🆘
+
+Al equipo de moderación de WhatsApp,
+
+Les escribo para DENUNCIAR un número que representa una AMENAZA GRAVE para la seguridad de los usuarios de WhatsApp.
+
+📌 NÚMERO IMPLICADO: ${p}
+
+Esta cuenta realiza ACTIVIDADES CRIMINALES y violaciones GRAVES de las condiciones de uso:
+
+1️⃣ ACOSO PSICOLÓGICO GRAVE
+- Envío de amenazas de muerte e intimidación
+- Acoso sexual repetido
+- Insultos racistas y xenófobos
+
+2️⃣ PORNOGRAFÍA INFANTIL 🚨
+- Compartir vídeos explícitos de menores
+- Difusión de imágenes de pornografía infantil
+- Solicitud sexual a personas vulnerables
+
+3️⃣ ESTAFAS FINANCIERAS Y FRAUDE
+- Intentos de estafa con perfiles falsos
+- Exigencia de pagos bajo amenazas
+- Robo de identidad y suplantación
+
+4️⃣ SPAM MASIVO Y MOLESTIAS
+- Envío de cientos de mensajes no solicitados
+- Distribución de enlaces maliciosos y virus
+- Creación de grupos para difundir odio
+
+Este comportamiento pone en peligro a cientos de usuarios, incluidos niños y ancianos.
+
+Solicito MEDIDAS INMEDIATAS:
+❌ Prohibición PERMANENTE de este número
+❌ Bloqueo del dispositivo asociado (IMEI)
+❌ Transmisión del expediente a las autoridades competentes (ciberdelincuencia)
+
+Tengo PRUEBAS IRREFUTABLES disponibles:
+📸 Capturas de pantalla de conversaciones
+🎥 Vídeos del contenido ilegal compartido
+📁 Archivos que documentan las amenazas
+
+WhatsApp debe ser un espacio SEGURO para todos. No permitan que estos criminales sigan haciendo daño.
+
+Gracias por actuar con prontitud.
+
+Atentamente,
+
+Un usuario ciudadano comprometido
+Con el apoyo del canal 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷`;
+
+                // Messages INDONESIA (kuat)
+                const idMessage = `🆘 LAPORAN URGENT - NOMOR BERBAHAYA 🆘
+
+Kepada tim moderasi WhatsApp,
+
+Saya menulis untuk MELAPORKAN nomor yang merupakan ANCAMAN SERIUS bagi keselamatan pengguna WhatsApp.
+
+📌 NOMOR YANG DILAPORKAN: ${p}
+
+Akun ini melakukan AKTIVITAS KRIMINAL dan pelanggaran BERAT terhadap ketentuan penggunaan:
+
+1️⃣ PELECEHAN PSIKOLOGIS BERAT
+- Mengirim ancaman pembunuhan dan intimidasi
+- Pelecehan seksual berulang
+- Hinaan rasis dan xenofobia
+
+2️⃣ PORNOGRAFI ANAK 🚨
+- Berbagi video eksplisit anak di bawah umur
+- Penyebaran gambar pornografi anak
+- Rayuan seksual kepada orang rentan
+
+3️⃣ PENIPUAN KEUANGAN DAN FRAUD
+- Upaya penipuan melalui profil palsu
+- Permintaan pembayaran di bawah ancaman
+- Pencurian identitas dan pemalsuan
+
+4️⃣ SPAM MASSAL DAN GANGGUAN
+- Mengirim ratusan pesan tidak diminta
+- Distribusi tautan berbahaya dan virus
+- Membuat grup untuk menyebarkan kebencian
+
+Perilaku ini membahayakan ratusan pengguna, termasuk anak-anak dan orang tua.
+
+Saya meminta TINDAKAN SEGERA:
+❌ Larangan PERMANEN nomor ini
+❌ Pemblokiran perangkat terkait (IMEI)
+❌ Transmisi berkas ke otoritas berwenang (kejahatan siber)
+
+Saya memiliki BUKTI TAK TERBANTAHKAN:
+📸 Tangkapan layar percakapan
+🎥 Video konten ilegal yang dibagikan
+📁 File yang mendokumentasikan ancaman
+
+WhatsApp harus menjadi ruang yang AMAN bagi semua orang. Jangan biarkan penjahat ini terus merugikan.
+
+Terima kasih atas tindakan cepatnya.
+
+Hormat saya,
+
+Pengguna warga yang peduli
+Didukung oleh channel 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷`;
+
+                // Messages PORTUGUÊS (poderoso)
+                const ptMessage = `🆘 DENÚNCIA URGENTE - NÚMERO PERIGOSO 🆘
+
+À equipa de moderação do WhatsApp,
+
+Escrevo para DENUNCIAR um número que representa uma AMEAÇA GRAVE à segurança dos utilizadores do WhatsApp.
+
+📌 NÚMERO ENVOLVIDO: ${p}
+
+Esta conta realiza ATIVIDADES CRIMINOSAS e violações GRAVES dos termos de uso:
+
+1️⃣ ASSÉDIO PSICOLÓGICO GRAVE
+- Envio de ameaças de morte e intimidação
+- Assédio sexual repetido
+- Insultos racistas e xenófobos
+
+2️⃣ PORNOGRAFIA INFANTIL 🚨
+- Partilha de vídeos explícitos de menores
+- Divulgação de imagens de pornografia infantil
+- Solicitação sexual de pessoas vulneráveis
+
+3️⃣ GOLPES FINANCEIROS E FRAUDE
+- Tentativas de fraude com perfis falsos
+- Exigência de pagamentos sob ameaças
+- Roubo de identidade e usurpação
+
+4️⃣ SPAM EM MASSA E INCÓMODOS
+- Envio de centenas de mensagens não solicitadas
+- Distribuição de links maliciosos e vírus
+- Criação de grupos para espalhar ódio
+
+Este comportamento coloca em perigo centenas de utilizadores, incluindo crianças e idosos.
+
+Solicito MEDIDAS IMEDIATAS:
+❌ Proibição PERMANENTE deste número
+❌ Bloqueio do dispositivo associado (IMEI)
+❌ Transmissão do processo às autoridades competentes (cibercrime)
+
+Tenho PROVAS IRREFUTÁVEIS disponíveis:
+📸 Capturas de ecrã das conversas
+🎥 Vídeos do conteúdo ilegal partilhado
+📁 Ficheiros que documentam as ameaças
+
+O WhatsApp deve ser um espaço SEGURO para todos. Não deixem estes criminosos continuarem a prejudicar.
+
+Obrigado por agirem rapidamente.
+
+Atenciosamente,
+
+Um utilizador cidadão empenhado
+Com o apoio do canal 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷`;
+
+                // Messages ARABIC (قوي)
+                const arMessage = `🆘 تقرير عاجل - رقم خطير 🆘
+
+إلى فريق الإشراف في واتساب،
+
+أكتب للإبلاغ عن رقم يمثل تهديداً خطيراً لسلامة مستخدمي واتساب.
+
+📌 الرقم المعني: ${p}
+
+هذا الحساب يقوم بأنشطة إجرامية وانتهاكات جسيمة لشروط الاستخدام:
+
+1️⃣ تحرش نفسي شديد
+- إرسال تهديدات بالقتل وترهيب
+- تحرش جنسي متكرر
+- إهانات عنصرية وكارهة للأجانب
+
+2️⃣ مواد إباحية للأطفال 🚨
+- مشاركة فيديوهات صريحة لقاصرين
+- نشر صور إباحية للأطفال
+- استدراج جنسي للأشخاص الضعفاء
+
+3️⃣ احتيال مالي ونصب
+- محاولات احتيال عبر حسابات مزيفة
+- طلب مدفوعات تحت التهديد
+- سرقة هوية وانتحال شخصية
+
+4️⃣ سبام هائل وإزعاج
+- إرسال مئات الرسائل غير المرغوب فيها
+- نشر روابط خبيثة وفيروسات
+- إنشاء مجموعات لنشر الكراهية
+
+هذا السلوك يعرض مئات المستخدمين للخطر، بمن فيهم الأطفال وكبار السن.
+
+أطلب إجراءات فورية:
+❌ حظر دائم لهذا الرقم
+❌ حظر الجهاز المرتبط (IMEI)
+❌ إحالة الملف إلى السلطات المختصة (جرائم الإنترنت)
+
+لدي أدلة دامغة:
+📸 لقطات شاشة للمحادثات
+🎥 فيديوهات للمحتوى غير القانوني
+📁 ملفات توثق التهديدات
+
+يجب أن يكون واتساب مساحة آمنة للجميع. لا تدعوا هؤلاء المجرمين يواصلون الضرر.
+
+شكراً للتحرك السريع.
+
+مع الاحترام،
+
+مستخدم مواطن ملتزم
+بدعم من قناة 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷`;
+
+                // Messages KREYÒL (pwisan)
+                const htMessage = `🆘 DENONSE UJAN - NIMEWO DANJERE 🆘
+
+Bay ekip moderasyon WhatsApp,
+
+M ap ekri pou DENONSE yon nimewo ki reprezante yon MENAS GRAV pou sekirite itilizatè WhatsApp yo.
+
+📌 NIMEWO KONSÈNE A: ${p}
+
+Kont sa a ap fè AKTIVITE KRIMINÈL ak vyolasyon GRAV kondisyon itilizasyon yo:
+
+1️⃣ HARÈLMAN SIKOLOJIK GRAV
+- Voye menas lanmò ak entimidasyon
+- Harèlman seksyèl repete
+- Joure rasis ak zenofòb
+
+2️⃣ PÒNOGRAFI TIMOUN 🚨
+- Pataje videyo eksplisit timoun minè
+- Difize imaj pònografi timoun
+- Solisitasyon seksyèl moun vilnerab
+
+3️⃣ ESKWOK FINANSIYE AK FROD
+- Tantativ èskwok ak fo pwofil
+- Mande pèman anba menas
+- Vòl idantite ak izipasyon
+
+4️⃣ SPAM MASIF AK NUISANS
+- Voye dè santèn mesaj san demann
+- Distribye lyen malveyan ak viris
+- Kreye gwoup pou gaye rayisab
+
+Konpòtman sa a mete an danje dè santèn itilizatè, kit se timoun oswa granmoun aje.
+
+M mande MEZI IMEDIAT:
+❌ Bannisman DEFINITIF nimewo sa a
+❌ Blokaj aparèy asosye a (IMEI)
+❌ Transmisyon dosye a bay otorite konpetan yo (kriminèl sou entènèt)
+
+Mwen gen PRÈV IRÉFUTAB disponib:
+📸 Eskran kaptire konvèsasyon yo
+🎥 Videyo kontni ilegal yo te pataje yo
+📁 Fichye ki montre menas yo
+
+WhatsApp dwe se yon espas AN SEKIRITE pou tout moun. Pa kite kriminèl sa yo kontinye fè mal.
+
+Mèsi pou aji rapid.
+
+Sensèman,
+
+Yon itilizatè sitwayen angaje
+Avèk sipò chanèl 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷`;
+
+                // Return the right message based on language
                 const messages = {
-                    fr: `Sujet : SIGNALEMENT URGENT – N° abusif : ${p}\n\nChère équipe WhatsApp,\n\nJe signale le numéro ${p} pour :\n- Harcèlement / menaces\n- Pédopornographie\n- Insultes sexuelles\n- Spam / arnaque\n\nMerci de bannir définitivement. Preuves disponibles.`,
-                    en: `Subject: URGENT REPORT – Abusive number: ${p}\n\nDear WhatsApp Team,\n\nI report ${p} for:\n- Harassment/threats\n- Child porn content\n- Sexual insults\n- Spam/scam\n\nPlease ban permanently. Evidence available.`,
-                    es: `Asunto: DENUNCIA URGENTE – Número abusivo: ${p}\n\nEstimado WhatsApp,\n\nDenuncio ${p} por:\n- Acoso/amenazas\n- Pornografía infantil\n- Insultos sexuales\n- Spam/estafa\n\nProhibición permanente. Pruebas disponibles.`,
-                    id: `Perihal: LAPORAN URGENT – Nomor bermasalah: ${p}\n\nTim WhatsApp,\n\nSaya laporkan ${p} karena:\n- Pelecehan/ancaman\n- Konten pornografi anak\n- Hinaan seksual\n- Spam/penipuan\n\nHarap blokir permanen. Ada bukti.`,
-                    pt: `Assunto: DENÚNCIA URGENTE – Número abusivo: ${p}\n\nCaro WhatsApp,\n\nDenuncio ${p} por:\n- Assédio/ameaças\n- Pornografia infantil\n- Insultos sexuais\n- Spam/golpe\n\nBanimento permanente. Provas disponíveis.`,
-                    ar: `الموضوع: تقرير عاجل – رقم مسيء: ${p}\n\nفريق واتساب،\n\nأبلغ عن ${p} بسبب:\n- تحرش/تهديدات\n- محتوى إباحي للأطفال\n- إهانات جنسية\n- بريد عشوائي/احتيال\n\nالرجاء الحظر الدائم. الأدلة متوفرة.`,
-                    ht: `Sijè : DENONSE UJAN – Nimewo abizif: ${p}\n\nChè WhatsApp,\n\nMwen denonse ${p} paske li :\n- Anraka / menase\n- Voye foto timoun\n- Joure ak mo sal\n- Spam / esè vòlè\n\nTanpri bani nèt. Mwen gen prèv.`
+                    fr: frMessage,
+                    en: enMessage,
+                    es: esMessage,
+                    id: idMessage,
+                    pt: ptMessage,
+                    ar: arMessage,
+                    ht: htMessage
                 };
+                
                 return messages[lang] || messages.fr;
             }
 
@@ -380,27 +854,36 @@
             }
 
             // ----- DÉTECTION RETOUR APRÈS ABONNEMENT (cochage auto) -----
-            // Idée : l'utilisateur clique sur le bouton "Vérifier/S'abonner" (lien s'ouvre).
-            // On stocke un timestamp, et dès que la page reprend le focus, on coche la case.
-            let subscriptionWindow = null;
             let focusCheckEnabled = false;
 
             verifyBtn.addEventListener('click', function(e) {
                 e.preventDefault();
-                // Ouvrir le lien du channel dans un nouvel onglet
-                subscriptionWindow = window.open('https://whatsapp.com/channel/0029Vb7cq27ISTkSECEyeF3L', '_blank');
-                focusCheckEnabled = true;  // activer la détection de retour
+                window.open('https://whatsapp.com/channel/0029Vb7cq27ISTkSECEyeF3L', '_blank');
+                focusCheckEnabled = true;
             });
 
-            // Détecte quand l'utilisateur revient sur l'onglet de l'outil
             window.addEventListener('focus', function() {
                 if (focusCheckEnabled) {
-                    // On coche automatiquement la case "abonné"
                     subCheck.checked = true;
-                    focusCheckEnabled = false;  // une seule fois
-                    // Optionnel : petit message de confirmation
+                    focusCheckEnabled = false;
+                }
+            });
+
+            // ----- VÉRIFICATION ABONNEMENT QUITTE LA PAGE (mod tardif) -----
+            window.addEventListener('beforeunload', function(e) {
+                if (!subCheck.checked) {
+                    // Afficher un message de confirmation avant de quitter
                     const lang = langSwitcher.value;
-                    // (pas de alerte pour pas déranger, mais on peut afficher un indicateur)
+                    const message = lang === 'fr' ? "⚠️ Vous n'avez pas confirmé votre abonnement au canal 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷. Sans abonnement, vous ne pourrez pas générer de message de signalement. Voulez-vous vraiment quitter ?" :
+                                   lang === 'en' ? "⚠️ You haven't confirmed your subscription to the 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷 channel. Without subscription, you won't be able to generate report messages. Do you really want to leave?" :
+                                   lang === 'es' ? "⚠️ No has confirmado tu suscripción al canal 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷. Sin suscripción, no podrás generar mensajes de denuncia. ¿Realmente quieres salir?" :
+                                   lang === 'id' ? "⚠️ Anda belum mengonfirmasi langganan ke channel 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷. Tanpa langganan, Anda tidak dapat membuat pesan laporan. Yakin ingin keluar?" :
+                                   lang === 'pt' ? "⚠️ Não confirmaste a tua subscrição no canal 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷. Sem subscrição, não poderás gerar mensagens de denúncia. Queres mesmo sair?" :
+                                   lang === 'ar' ? "⚠️ لم تؤكد اشتراكك في قناة 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷. بدون اشتراك، لن تتمكن من إنشاء رسائل الإبلاغ. هل تريد حقًا المغادرة؟" :
+                                   "⚠️ Ou poko verifye abònman ou nan channel 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷. San abònman, ou pap kapab jeneri mesaj denonsasyon. Eske ou re vle kite a?";
+                    
+                    e.returnValue = message;
+                    return message;
                 }
             });
 
@@ -409,17 +892,14 @@
                 const lang = langSwitcher.value;
                 const t = translations[lang] || translations.fr;
 
-                // Vérifier numéro
                 if (!phoneInput.value.trim() || phoneInput.value === '+' || phoneInput.value === '+509') {
-                    alert(t.alertPhone || "Veuillez entrer un numéro");
+                    alert(t.alertPhone);
                     return;
                 }
-                // Vérifier abonnement
                 if (!subCheck.checked) {
-                    alert(t.alertSub || "Vous devez être abonné au canal");
+                    alert(t.alertSub);
                     return;
                 }
-                // Tout est bon : générer le message
                 appealField.value = buildMessage(phoneInput.value.trim(), lang);
             });
 
@@ -439,7 +919,7 @@
                     alert("Générez d'abord le message"); 
                     return; 
                 }
-                window.location.href = `mailto:support@whatsapp.com?subject=${encodeURIComponent("Signalement WhatsApp abus")}&body=${encodeURIComponent(appealField.value)}`;
+                window.location.href = `mailto:support@whatsapp.com?subject=${encodeURIComponent("Signalement WhatsApp abus - URGENT")}&body=${encodeURIComponent(appealField.value)}`;
             });
 
             // ----- CHANGEMENT LANGUE -----
