@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>𝙰𝙳𝚂 𝚃𝙴𝙲𝙷— Signalement Abus (Auto‑subscribe)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+            background: radial-gradient(circle at 30% 20%, #162b33, #0d2429);
+            color: #e2f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+        }
+
+        .card {
+            background: rgba(12, 35, 35, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            width: 100%;
+            max-width: 440px;
+            border-radius: 40px;
+            padding: 24px 22px 28px;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.7);
+            max-height: 95vh;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #2f9b8c #0b3535;
+        }
+
+        .card::-webkit-scrollbar {
+            width: 5px;
+        }
+        .card::-webkit-scrollbar-track {
+            background: #0b3535;
+            border-radius: 20px;
+        }
+        .card::-webkit-scrollbar-thumb {
+            background: #2f9b8c;
+            border-radius: 20px;
+        }
+
+        .glow-title {
+            font-size: 26px;
+            font-weight: 800;
+            text-align: center;
+            background: linear-gradient(145deg, #fee5a6, #a8f0e5);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 6px;
+            animation: breathe 3s infinite ease-in-out;
+        }
+
+        @keyframes breathe {
+            0% { text-shadow: 0 0 6px #b2ffe6, 0 0 12px #457a70; }
+            50% { text-shadow: 0 0 20px #ffe1a3, 0 0 40px #69c2b0; }
+            100% { text-shadow: 0 0 6px #b2ffe6, 0 0 12px #457a70; }
+        }
+
+        .badge-pulse {
+            font-size: 16px;
+            background: #1e564b;
+            padding: 8px 20px;
+            border-radius: 60px;
+            width: fit-content;
+            margin: 6px auto 16px;
+            border: none;
+            animation: softFlash 2.2s infinite;
+            font-weight: 600;
+            box-shadow: 0 6px 12px #00000040;
+        }
+
+        @keyframes softFlash {
+            0% { background: #1e564b; }
+            50% { background: #2c7c6b; box-shadow: 0 0 22px #86ecd6; }
+            100% { background: #1e564b; }
+        }
+
+        .lang-wrapper {
+            display: flex;
+            justify-content: center;
+            margin: 6px 0 16px;
+        }
+        select {
+            background: #173e3b;
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            padding: 12px 36px 12px 26px;
+            border-radius: 60px;
+            border: none;
+            appearance: none;
+            -webkit-appearance: none;
+            text-align: center;
+            text-align-last: center;
+            width: 80%;
+            max-width: 260px;
+            cursor: pointer;
+            box-shadow: 0 10px 10px -5px black;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24' fill='none' stroke='%23a0ecd9' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+            background-repeat: no-repeat;
+            background-position: right 18px center;
+            background-size: 18px;
+        }
+        select:hover {
+            background-color: #216357;
+        }
+        select:focus {
+            outline: 2px solid #77ddd0;
+        }
+
+        h2 {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 5px 0 6px;
+            color: #d6f3ea;
+        }
+
+        .field {
+            width: 100%;
+            padding: 15px 18px;
+            border: none;
+            border-radius: 60px;
+            background: #edfff9;
+            color: #052e28;
+            font-size: 16px;
+            font-weight: 500;
+            margin: 10px 0 16px;
+            box-shadow: 0 8px 12px #00000030 inset, 0 2px 4px #ffffff30;
+        }
+        .field:focus {
+            outline: 3px solid #fcb1a4;
+            background: #ffffff;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 18px 18px;
+            border: none;
+            border-radius: 30px;
+            background: #f4fff9;
+            color: #0f3d36;
+            font-size: 15px;
+            font-weight: 500;
+            margin: 12px 0 10px;
+            resize: vertical;
+            min-height: 140px;
+            max-height: 200px;
+            box-shadow: 0 8px 12px #00000040 inset;
+        }
+        textarea:focus {
+            outline: 3px solid #feaca7;
+        }
+
+        .btn-action {
+            width: 100%;
+            background: #c4556f;
+            border: none;
+            padding: 15px 8px;
+            margin: 6px 0;
+            border-radius: 60px;
+            font-weight: 800;
+            font-size: 17px;
+            color: white;
+            box-shadow: 0 8px 0 #642f40, 0 12px 24px #000000b0;
+            transition: 0.15s;
+            cursor: pointer;
+            letter-spacing: 0.4px;
+        }
+        .btn-action:hover {
+            background: #dc7390;
+            transform: translateY(-4px);
+            box-shadow: 0 10px 0 #642f40, 0 16px 28px black;
+        }
+        .btn-action:active {
+            transform: translateY(5px);
+            box-shadow: 0 3px 0 #642f40, 0 12px 24px black;
+        }
+
+        .btn-wa {
+            background: #166b5b;
+            box-shadow: 0 8px 0 #0a3f35;
+        }
+        .btn-wa:hover {
+            background: #24937e;
+        }
+
+        .subscribe-area {
+            background: #0a3a3a;
+            border-radius: 60px;
+            padding: 14px 16px;
+            margin: 15px 0 10px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            box-shadow: inset 0 2px 8px #00000060;
+        }
+        .subscribe-check {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+        }
+        .subscribe-check input {
+            width: 22px;
+            height: 22px;
+            accent-color: #35d0b2;
+            transform: scale(1.1);
+            cursor: pointer;
+        }
+        .btn-small {
+            background: #2b8572;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-weight: 700;
+            color: white;
+            box-shadow: 0 4px 0 #175449;
+            cursor: pointer;
+            transition: 0.1s;
+            font-size: 14px;
+            margin-left: auto;
+        }
+        .btn-small:hover {
+            background: #3ea28d;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 #175449;
+        }
+        .btn-small:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #175449;
+        }
+
+        .footer-area {
+            margin: 16px 0 0;
+            background: #15433e;
+            padding: 14px 8px;
+            border-radius: 60px;
+            font-size: 15px;
+            text-align: center;
+            box-shadow: inset 0 2px 10px #00000050;
+        }
+
+        .signature {
+            text-align: center;
+            margin-top: 14px;
+            font-size: 14px;
+            color: #bcefe3;
+            font-weight: 500;
+        }
+        .signature strong {
+            color: #ffdaa8;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="glow-title">🚨 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷 · 𝚂𝚒𝚐𝚗𝚊𝚕𝚎𝚖𝚎𝚗𝚝</div>
+        <div class="badge-pulse" id="dynamicBadge">🔍 Dénoncer un abus WhatsApp</div>
+
+        <div class="lang-wrapper">
+            <select id="langSwitcher">
+                <option value="fr" selected>Français</option>
+                <option value="en">English</option>
+                <option value="es">Español</option>
+                <option value="id">Indonesia</option>
+                <option value="pt">Português</option>
+                <option value="ar">العربية</option>
+                <option value="ht">Kreyòl</option>
+            </select>
+        </div>
+
+        <h2 id="labelIntro">📞 Entrez le numéro à signaler *</h2>
+        <input type="text" class="field" id="phoneNumber" placeholder="+509XXXXXXXX" value="+509" required>
+
+        <!-- ZÒN ABÒNMAN AVÈK DETEKSYON RETOU -->
+        <div class="subscribe-area" id="subscribeBlock">
+            <div class="subscribe-check">
+                <input type="checkbox" id="subscribedCheck">
+                <label for="subscribedCheck" id="subLabel">✅ Je suis abonné(e) au canal</label>
+            </div>
+            <button class="btn-small" id="verifySubBtn">📱 Vérifier / S'abonner</button>
+        </div>
+
+        <button class="btn-action" id="generateBtn">⚡ GÉNÉRER LE MESSAGE ⚡</button>
+
+        <textarea id="appealText" readonly placeholder="Le message de signalement apparaîtra ici..."></textarea>
+
+        <button class="btn-action" id="copyBtn">📋 COPIER LE MESSAGE</button>
+        <button class="btn-action" id="emailBtn">📧 ENVOYER PAR EMAIL</button>
+
+        <button class="btn-action btn-wa" id="contactBtn" onclick="window.open('https://wa.me/242069678625','_blank')">💬 𝙲𝙾𝙽𝚃𝙰𝙲𝚃𝙴𝚁 𝙰𝙳𝚂</button>
+        <button class="btn-action btn-wa" id="joinBtn" onclick="window.open('https://whatsapp.com/channel/0029Vb7cq27ISTkSECEyeF3L',''_blank')">📣 JOIN 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷 CHANNEL</button>
+
+        <div class="footer-area" id="footerText">
+            ✉️ Envoyer à: <strong>support@whatsapp.com</strong>
+        </div>
+        <div class="signature" id="signatureText">
+            Fait par <strong>𝙰𝙳𝚂</strong> — toutes langues
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // ----- DOM ELEMENTS -----
+            const phoneInput = document.getElementById('phoneNumber');
+            const appealField = document.getElementById('appealText');
+            const generateBtn = document.getElementById('generateBtn');
+            const copyBtn = document.getElementById('copyBtn');
+            const emailBtn = document.getElementById('emailBtn');
+            const langSwitcher = document.getElementById('langSwitcher');
+            const subCheck = document.getElementById('subscribedCheck');
+            const verifyBtn = document.getElementById('verifySubBtn');
+
+            const dynamicBadge = document.getElementById('dynamicBadge');
+            const labelIntro = document.getElementById('labelIntro');
+            const footerText = document.getElementById('footerText');
+            const signatureText = document.getElementById('signatureText');
+            const contactBtn = document.getElementById('contactBtn');
+            const joinBtn = document.getElementById('joinBtn');
+            const subLabel = document.getElementById('subLabel');
+
+            // ----- TRADUCTIONS (avec alerte) -----
+            const translations = {
+                fr: { badge:"🔍 Dénoncer un abus WhatsApp", label:"📞 Entrez le numéro à signaler *", generate:"⚡ GÉNÉRER LE MESSAGE ⚡", copy:"📋 COPIER LE MESSAGE", email:"📧 ENVOYER PAR EMAIL", contact:"💬 CONTACTER 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷", join:"📣 JOIN 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷 CHANNEL", footer:"✉️ Envoyer à: support@whatsapp.com", signature:"Fait par 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷 — toutes langues", subLabel:"✅ Je suis abonné(e) au canal", subBtn:"📱 Vérifier / S'abonner", phonePlaceholder:"+509XXXXXXXX", alertPhone:"Veuillez entrer un numéro de téléphone", alertSub:"Vous devez être abonné au canal pour générer le message." },
+                en: { badge:"🔍 Report WhatsApp abuse", label:"📞 Enter the number to report *", generate:"⚡ GENERATE MESSAGE ⚡", copy:"📋 COPY MESSAGE", email:"📧 SEND BY EMAIL", contact:"💬 𝙲𝙾𝙽𝚃𝙰𝙲𝚃 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷", join:"📣 JOIN 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷 CHANNEL", footer:"✉️ Send to: support@whatsapp.com", signature:"Made by 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷 — all languages", subLabel:"✅ I am subscribed to the channel", subBtn:"📱 Verify / Subscribe", phonePlaceholder:"+509XXXXXXXX", alertPhone:"Please enter a phone number", alertSub:"You must be subscribed to the channel to generate the message." },
+                es: { badge:"🔍 Denunciar abuso WhatsApp", label:"📞 Ingrese el número a denunciar *", generate:"⚡ GENERAR MENSAJE ⚡", copy:"📋 COPIAR MENSAJE", email:"📧 ENVIAR POR CORREO", contact:"💬 CONTACTAR 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷", join:"📣 UNIRSE AL CANAL 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷", footer:"✉️ Enviar a: support@whatsapp.com", signature:"Hecho por 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷 — todos los idiomas", subLabel:"✅ Estoy suscrito al canal", subBtn:"📱 Verificar / Suscribirse", phonePlaceholder:"+509XXXXXXXX", alertPhone:"Ingrese un número de teléfono", alertSub:"Debes estar suscrito al canal para generar el mensaje." },
+                id: { badge:"🔍 Laporkan penyalahgunaan WhatsApp", label:"📞 Masukkan nomor yang dilaporkan *", generate:"⚡ BUAT PESAN ⚡", copy:"📋 SALIN PESAN", email:"📧 KIRIM VIA EMAIL", contact:"💬 HUBUNGI 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷", join:"📣 GABUNG CHANNEL 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷", footer:"✉️ Kirim ke: support@whatsapp.com", signature:"Dibuat oleh 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷 — semua bahasa", subLabel:"✅ Saya sudah berlangganan channel", subBtn:"📱 Periksa / Berlangganan", phonePlaceholder:"+509XXXXXXXX", alertPhone:"Masukkan nomor telepon", alertSub:"Anda harus berlangganan channel untuk membuat pesan." },
+                pt: { badge:"🔍 Denunciar abuso WhatsApp", label:"📞 Insira o número a denunciar *", generate:"⚡ GERAR MENSAGEM ⚡", copy:"📋 COPIAR MENSAGEM", email:"📧 ENVIAR POR E-MAIL", contact:"💬 CONTATAR 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷", join:"📣 ENTRAR NO CANAL 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷", footer:"✉️ Enviar para: support@whatsapp.com", signature:"Feito por 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷 — todos os idiomas", subLabel:"✅ Estou inscrito no canal", subBtn:"📱 Verificar / Inscrever-se", phonePlaceholder:"+509XXXXXXXX", alertPhone:"Digite um número de telefone", alertSub:"Você deve estar inscrito no canal para gerar a mensagem." },
+                ar: { badge:"🔍 الإبلاغ عن انتهاك واتساب", label:"📞 أدخل الرقم المراد الإبلاغ عنه *", generate:"⚡ إنشاء الرسالة ⚡", copy:"📋 نسخ الرسالة", email:"📧 إرسال بالبريد", contact:"💬 الاتصال بـ 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷", join:"📣 الانضمام إلى القناة", footer:"✉️ أرسل إلى: support@whatsapp.com", signature:"صنع بواسطة 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷 — جميع اللغات", subLabel:"✅ أنا مشترك في القناة", subBtn:"📱 تحقق / اشترك", phonePlaceholder:"+509XXXXXXXX", alertPhone:"الرجاء إدخال رقم الهاتف", alertSub:"يجب أن تكون مشتركًا في القناة لإنشاء الرسالة." },
+                ht: { badge:"🔍 Denonse abi WhatsApp", label:"📞 Antre nimewo pou denonse a *", generate:"⚡ JENERI MESAJ LA ⚡", copy:"📋 KOPI MESAJ LA", email:"📧 VOYE PA IMEL", contact:"💬 KONTAKTE 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷", join:"📣 JOIN 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷 CHANNEL", footer:"✉️ Voye bay: support@whatsapp.com", signature:"Fet pa 𝙰𝙳𝚂 𝚃𝙴𝙲𝙷 — tout lang", subLabel:"✅ Mwen abòne nan channel la", subBtn:"📱 Verifye / Abòne", phonePlaceholder:"+509XXXXXXXX", alertPhone:"Tanpri antre nimewo telefòn nan", alertSub:"Ou dwe abòne nan channel la anvan ou jeneri mesaj la." }
+            };
+
+            // ----- MESSAGE DE SIGNALEMENT (court mais complet) -----
+            function buildMessage(phone, lang) {
+                const p = phone && phone.trim() ? phone.trim() : "[NUMÉRO MANQUANT]";
+                const messages = {
+                    fr: `Sujet : SIGNALEMENT URGENT – N° abusif : ${p}\n\nChère équipe WhatsApp,\n\nJe signale le numéro ${p} pour :\n- Harcèlement / menaces\n- Pédopornographie\n- Insultes sexuelles\n- Spam / arnaque\n\nMerci de bannir définitivement. Preuves disponibles.`,
+                    en: `Subject: URGENT REPORT – Abusive number: ${p}\n\nDear WhatsApp Team,\n\nI report ${p} for:\n- Harassment/threats\n- Child porn content\n- Sexual insults\n- Spam/scam\n\nPlease ban permanently. Evidence available.`,
+                    es: `Asunto: DENUNCIA URGENTE – Número abusivo: ${p}\n\nEstimado WhatsApp,\n\nDenuncio ${p} por:\n- Acoso/amenazas\n- Pornografía infantil\n- Insultos sexuales\n- Spam/estafa\n\nProhibición permanente. Pruebas disponibles.`,
+                    id: `Perihal: LAPORAN URGENT – Nomor bermasalah: ${p}\n\nTim WhatsApp,\n\nSaya laporkan ${p} karena:\n- Pelecehan/ancaman\n- Konten pornografi anak\n- Hinaan seksual\n- Spam/penipuan\n\nHarap blokir permanen. Ada bukti.`,
+                    pt: `Assunto: DENÚNCIA URGENTE – Número abusivo: ${p}\n\nCaro WhatsApp,\n\nDenuncio ${p} por:\n- Assédio/ameaças\n- Pornografia infantil\n- Insultos sexuais\n- Spam/golpe\n\nBanimento permanente. Provas disponíveis.`,
+                    ar: `الموضوع: تقرير عاجل – رقم مسيء: ${p}\n\nفريق واتساب،\n\nأبلغ عن ${p} بسبب:\n- تحرش/تهديدات\n- محتوى إباحي للأطفال\n- إهانات جنسية\n- بريد عشوائي/احتيال\n\nالرجاء الحظر الدائم. الأدلة متوفرة.`,
+                    ht: `Sijè : DENONSE UJAN – Nimewo abizif: ${p}\n\nChè WhatsApp,\n\nMwen denonse ${p} paske li :\n- Anraka / menase\n- Voye foto timoun\n- Joure ak mo sal\n- Spam / esè vòlè\n\nTanpri bani nèt. Mwen gen prèv.`
+                };
+                return messages[lang] || messages.fr;
+            }
+
+            // ----- APPLIQUER LANGUE -----
+            function applyLanguage(lang) {
+                if (!translations[lang]) lang = 'fr';
+                const t = translations[lang];
+                dynamicBadge.innerText = t.badge;
+                labelIntro.innerText = t.label;
+                generateBtn.innerText = t.generate;
+                copyBtn.innerText = t.copy;
+                emailBtn.innerText = t.email;
+                contactBtn.innerText = t.contact;
+                joinBtn.innerText = t.join;
+                footerText.innerHTML = t.footer;
+                signatureText.innerText = t.signature;
+                subLabel.innerText = t.subLabel;
+                verifyBtn.innerText = t.subBtn;
+                phoneInput.placeholder = t.phonePlaceholder;
+            }
+
+            // ----- DÉTECTION RETOUR APRÈS ABONNEMENT (cochage auto) -----
+            // Idée : l'utilisateur clique sur le bouton "Vérifier/S'abonner" (lien s'ouvre).
+            // On stocke un timestamp, et dès que la page reprend le focus, on coche la case.
+            let subscriptionWindow = null;
+            let focusCheckEnabled = false;
+
+            verifyBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Ouvrir le lien du channel dans un nouvel onglet
+                subscriptionWindow = window.open('https://whatsapp.com/channel/0029Vb7cq27ISTkSECEyeF3L', '_blank');
+                focusCheckEnabled = true;  // activer la détection de retour
+            });
+
+            // Détecte quand l'utilisateur revient sur l'onglet de l'outil
+            window.addEventListener('focus', function() {
+                if (focusCheckEnabled) {
+                    // On coche automatiquement la case "abonné"
+                    subCheck.checked = true;
+                    focusCheckEnabled = false;  // une seule fois
+                    // Optionnel : petit message de confirmation
+                    const lang = langSwitcher.value;
+                    // (pas de alerte pour pas déranger, mais on peut afficher un indicateur)
+                }
+            });
+
+            // ----- GÉNÉRATION AVEC VÉRIFS -----
+            generateBtn.addEventListener('click', function() {
+                const lang = langSwitcher.value;
+                const t = translations[lang] || translations.fr;
+
+                // Vérifier numéro
+                if (!phoneInput.value.trim() || phoneInput.value === '+' || phoneInput.value === '+509') {
+                    alert(t.alertPhone || "Veuillez entrer un numéro");
+                    return;
+                }
+                // Vérifier abonnement
+                if (!subCheck.checked) {
+                    alert(t.alertSub || "Vous devez être abonné au canal");
+                    return;
+                }
+                // Tout est bon : générer le message
+                appealField.value = buildMessage(phoneInput.value.trim(), lang);
+            });
+
+            // ----- COPIER -----
+            copyBtn.addEventListener('click', function() {
+                if (!appealField.value.trim()) { 
+                    alert("Générez d'abord le message"); 
+                    return; 
+                }
+                appealField.select();
+                navigator.clipboard.writeText(appealField.value).then(() => alert('✅ Copié!'));
+            });
+
+            // ----- EMAIL -----
+            emailBtn.addEventListener('click', function() {
+                if (!appealField.value.trim()) { 
+                    alert("Générez d'abord le message"); 
+                    return; 
+                }
+                window.location.href = `mailto:support@whatsapp.com?subject=${encodeURIComponent("Signalement WhatsApp abus")}&body=${encodeURIComponent(appealField.value)}`;
+            });
+
+            // ----- CHANGEMENT LANGUE -----
+            langSwitcher.addEventListener('change', (e) => applyLanguage(e.target.value));
+
+            // Initialiser en français
+            applyLanguage('fr');
+            langSwitcher.value = 'fr';
+        })();
+    </script>
+</body>
+</html>
